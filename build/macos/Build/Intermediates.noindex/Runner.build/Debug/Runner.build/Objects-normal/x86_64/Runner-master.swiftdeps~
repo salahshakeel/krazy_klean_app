@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+options: "9a1a92567da5ba281853eeb8aa848932366c22d4c906cd6a3183548b7eafb970"
+build_start_time: [1697659907, 336709976]
+build_end_time: [1697659916, 360766887]
+inputs:
+  "/Users/twinprogrammers/Flutter Projects/krazy_klean_app/macos/Flutter/GeneratedPluginRegistrant.swift": [1697659868, 305130481]
+  "/Users/twinprogrammers/Flutter Projects/krazy_klean_app/macos/Runner/AppDelegate.swift": [1633001520, 0]
+  "/Users/twinprogrammers/Flutter Projects/krazy_klean_app/macos/Runner/MainFlutterWindow.swift": [1633001520, 0]
