@@ -1,4 +1,4 @@
-#Sat Oct 28 16:18:35 PKT 2023
-base.0=/Users/twinprogrammers/Flutter Projects/krazy_klean_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
+#Tue Nov 07 00:41:32 PKT 2023
+base.0=F\:\\GithubProjects\\krazy_klean_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
+renamed.0=classes.dex

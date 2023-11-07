@@ -9,6 +9,9 @@ class MyTextfeild extends StatelessWidget {
   final double? prefix_icon_size;
   final double? suffix_size;
   final bool enable_suffix;
+  final String? validate_message;
+  final bool? obscure_text;
+  final TextEditingController? controller;
   const MyTextfeild(
       {super.key,
       this.hint_text,
@@ -17,6 +20,9 @@ class MyTextfeild extends StatelessWidget {
       this.prefix_icon_size,
       this.suffix_icon,
       this.suffix_size,
+      this.controller,
+      this.validate_message,
+      this.obscure_text,
       required this.enable_suffix});
 
   @override
@@ -24,6 +30,15 @@ class MyTextfeild extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: TextFormField(
+        obscureText: obscure_text ?? false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: controller,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return validate_message ?? "Field cannot be empty";
+          }
+          return null;
+        },
         decoration: InputDecoration(
             fillColor: Colors.grey.shade100,
             filled: true,
@@ -39,7 +54,6 @@ class MyTextfeild extends StatelessWidget {
                     color: Colors.grey,
                   )
                 : null,
-          
             hintText: hint_text,
             hintStyle: GoogleFonts.poppins(
                 fontSize: font_size ?? 12, color: Colors.grey),

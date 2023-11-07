@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:krazy_klean_app/widgets/my_checkbox.dart';
 
@@ -9,6 +12,9 @@ import '../widgets/my_richtext.dart';
 import '../widgets/my_text.dart';
 import '../widgets/my_textfeild.dart';
 import '../widgets/social_card.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+import 'package:krazy_klean_app/Controllers/AuthController.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,12 +24,20 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final AuthController authController = Get.put(AuthController());
+
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
+  final key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(50), child: AuthAppbar()),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -44,22 +58,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 font_weight: FontWeight.bold,
               ),
               Form(
+                key: key,
                 child: Column(children: [
                   MyTextfeild(
+                    controller: nameController,
+                    hint_text: "Name",
+                    prefix_icon: Icons.person,
+                    enable_suffix: false,
+                    validate_message: "Please enter your name",
+                  ),
+                  MyTextfeild(
+                    controller: emailController,
                     hint_text: "Email",
                     prefix_icon: Icons.mail,
                     enable_suffix: false,
+                    validate_message: "Please enter your email",
                   ),
                   MyTextfeild(
+                    controller: passwordController,
                     hint_text: "Password",
                     prefix_icon: Icons.lock,
                     suffix_icon: Icons.remove_red_eye,
                     enable_suffix: true,
+                    obscure_text: true,
+                    validate_message: "Please enter your password",
                   ),
                   MyCheckbox(),
                   MyButton(
                     text: "Sign Up",
-                    onPressed: () {},
+                    onPressed: () {
+                      if (key.currentState!.validate()) {
+                        authController.onCreateAccount(nameController.text,
+                            emailController.text, passwordController.text);
+                      }
+                    },
                   ),
                   Padding(
                       padding: const EdgeInsets.only(top: 20),
@@ -69,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFF0DABC2),
                       )),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -113,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontWeight: FontWeight.bold),
                           )
                         ]),
-                  )
+                  ),
                 ]),
               )
             ]),
